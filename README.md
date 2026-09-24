@@ -2,7 +2,7 @@
 
 Una hermosa landing page para un servicio de belleza de uñas con integración de base de datos PostgreSQL para reservas de citas.
 
-> Comprobación de autodespliegue en Easypanel: 24 de septiembre de 2026.
+> Comprobación de autodespliegue en Easypanel: 24 de septiembre de 2026 (repositorio `web-nails`).
 
 ## 🚀 Características
 
