@@ -2,6 +2,8 @@
 
 Una hermosa landing page para un servicio de belleza de uñas con integración de base de datos PostgreSQL para reservas de citas.
 
+> Comprobación de autodespliegue en Easypanel: 24 de septiembre de 2026.
+
 ## 🚀 Características
 
 - **Diseño Responsivo**: Diseño amigable para móviles que funciona en todos los dispositivos
