@@ -273,6 +273,8 @@
                 const result = await response.json();
                 console.log('Reservation saved to database:', result);
                 showSuccessMessage('¡Cita reservada exitosamente!');
+              } else if (response.status === 429) {
+                showErrorMessage('Has alcanzado el límite de 2 reservas por hora desde esta conexión. Inténtalo de nuevo más tarde.');
               } else {
                 const errorText = await response.text();
                 console.error('Error saving reservation to database:', errorText);

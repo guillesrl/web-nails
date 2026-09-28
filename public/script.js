@@ -223,7 +223,11 @@ if (bookingForm && successMessage) {
         } else {
             const error = await response.json();
             console.error('Error creating reservation:', error);
-            alert('Error creando reserva. Por favor intente de nuevo.');
+            if (response.status === 429) {
+                alert('Has alcanzado el límite de 2 reservas por hora desde esta conexión. Inténtalo de nuevo más tarde.');
+            } else {
+                alert('Error creando reserva. Por favor intente de nuevo.');
+            }
         }
     } catch (error) {
         console.error('Error de red:', error);
