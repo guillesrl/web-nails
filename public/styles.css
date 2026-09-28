@@ -186,6 +186,20 @@ body {
     margin-bottom: 1.5rem;
 }
 
+.reveal-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.55em);
+    filter: blur(3px);
+    transition: opacity 0.35s ease, transform 0.45s ease, filter 0.45s ease;
+}
+
+.reveal-letter.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
 .about-text p {
     font-size: 1.1rem;
     color: #666;
@@ -699,5 +713,14 @@ body {
 
     .booking-form-container {
         padding: 1.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal-letter {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
     }
 }
