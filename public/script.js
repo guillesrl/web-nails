@@ -32,6 +32,35 @@ function scrollToServices() {
     servicesSection.scrollIntoView({ behavior: 'smooth' });
 }
 
+// Hero editorial: zoom and lateral movement tied to scroll, inspired by
+// the frame-by-frame animation used on the Stylo peluquería site.
+const hero = document.querySelector('.hero');
+const heroImage = document.getElementById('hero-image');
+
+if (hero && heroImage) {
+    let heroTicking = false;
+
+    const updateHero = () => {
+        const maxScroll = Math.max(hero.offsetHeight - window.innerHeight, 1);
+        const progress = Math.min(1, Math.max(0, (window.scrollY - hero.offsetTop) / maxScroll));
+        const scale = 1.04 + progress * 0.12;
+        const x = progress * -3;
+        const y = progress * -1.5;
+        heroImage.style.transform = `scale(${scale}) translate3d(${x}%, ${y}%, 0)`;
+        heroTicking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+        if (!heroTicking) {
+            window.requestAnimationFrame(updateHero);
+            heroTicking = true;
+        }
+    }, { passive: true });
+
+    window.addEventListener('resize', updateHero);
+    updateHero();
+}
+
 // Estado de paginación
 let currentPage = 1;
 const ITEMS_PER_PAGE = 10;
