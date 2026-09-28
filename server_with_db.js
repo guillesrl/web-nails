@@ -20,7 +20,7 @@ const apiLimiter = rateLimit({
 
 const createLimiter = rateLimit({
   windowMs: 60 * 60 * 1000,
-  max: 5,
+  max: 2,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: 'Reservation limit reached, please try again in an hour.' },
