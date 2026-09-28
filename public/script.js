@@ -69,11 +69,12 @@ if (aboutSection && aboutImage) {
     let aboutTicking = false;
 
     const updateAboutImage = () => {
-        const sectionStart = aboutSection.offsetTop - window.innerHeight;
-        const sectionEnd = aboutSection.offsetTop + aboutSection.offsetHeight;
-        const progress = Math.min(1, Math.max(0, (window.scrollY - sectionStart) / Math.max(sectionEnd - sectionStart, 1)));
-        const scale = 1.04 + progress * 0.08;
-        const y = (0.5 - progress) * 5;
+        const imageRect = aboutImage.getBoundingClientRect();
+        const progress = Math.min(1, Math.max(0,
+            (window.innerHeight - imageRect.top) / Math.max(window.innerHeight + imageRect.height, 1)
+        ));
+        const scale = 1.06 + progress * 0.16;
+        const y = (0.5 - progress) * 10;
         aboutImage.style.transform = `scale(${scale}) translate3d(0, ${y}%, 0)`;
         aboutTicking = false;
     };
