@@ -32,47 +32,59 @@ function scrollToServices() {
     servicesSection.scrollIntoView({ behavior: 'smooth' });
 }
 
-// Reveal the About heading letter by letter as it enters the viewport.
-const aboutHeading = document.querySelector('.about-text h2');
+// Reveal section headings letter by letter and supporting copy word by word.
+const revealTargets = document.querySelectorAll(
+    '.about-text h2, .about-text p, .welcome h2, .services > .container > h2, .booking h2'
+);
+const revealGroups = [];
 
-if (aboutHeading) {
-    const headingText = aboutHeading.textContent.trim();
-    aboutHeading.setAttribute('aria-label', headingText);
-    aboutHeading.textContent = '';
+revealTargets.forEach((target) => {
+    const text = target.textContent.trim();
+    const isParagraph = target.tagName === 'P';
+    const tokens = isParagraph ? text.match(/\S+\s*/g) || [] : Array.from(text);
 
-    Array.from(headingText).forEach((character, index) => {
+    target.setAttribute('aria-label', text);
+    target.textContent = '';
+    target.classList.add('reveal-copy');
+
+    tokens.forEach((token, index) => {
         const letter = document.createElement('span');
         letter.className = 'reveal-letter';
         letter.dataset.index = index;
-        letter.textContent = character === ' ' ? '\u00a0' : character;
-        aboutHeading.appendChild(letter);
+        letter.textContent = isParagraph ? token : (token === ' ' ? '\u00a0' : token);
+        target.appendChild(letter);
     });
 
-    const revealLetters = Array.from(aboutHeading.children);
+    revealGroups.push({ element: target, letters: Array.from(target.children) });
+});
+
+if (revealGroups.length) {
     let headingTicking = false;
 
-    const updateAboutHeading = () => {
-        const rect = aboutHeading.getBoundingClientRect();
-        const start = window.innerHeight * 0.9;
-        const end = window.innerHeight * 0.2;
-        const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
-        const visibleLetters = Math.ceil(progress * revealLetters.length);
+    const updateTextReveals = () => {
+        revealGroups.forEach(({ element, letters }) => {
+            const rect = element.getBoundingClientRect();
+            const start = window.innerHeight * 0.9;
+            const end = window.innerHeight * 0.2;
+            const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
+            const visibleLetters = Math.ceil(progress * letters.length);
 
-        revealLetters.forEach((letter, index) => {
-            letter.classList.toggle('is-visible', index < visibleLetters);
+            letters.forEach((letter, index) => {
+                letter.classList.toggle('is-visible', index < visibleLetters);
+            });
         });
         headingTicking = false;
     };
 
     window.addEventListener('scroll', () => {
         if (!headingTicking) {
-            window.requestAnimationFrame(updateAboutHeading);
+            window.requestAnimationFrame(updateTextReveals);
             headingTicking = true;
         }
     }, { passive: true });
 
-    window.addEventListener('resize', updateAboutHeading);
-    updateAboutHeading();
+    window.addEventListener('resize', updateTextReveals);
+    updateTextReveals();
 }
 
 // Hero editorial: zoom and lateral movement tied to scroll, inspired by

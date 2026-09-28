@@ -200,6 +200,14 @@ body {
     filter: blur(0);
 }
 
+.reveal-copy .reveal-letter {
+    transition-delay: 20ms;
+}
+
+.reveal-copy > .reveal-letter {
+    white-space: pre-wrap;
+}
+
 .about-text p {
     font-size: 1.1rem;
     color: #666;
