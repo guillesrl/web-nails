@@ -200,6 +200,10 @@ body {
     filter: blur(0);
 }
 
+.hero-reveal-letter {
+    transition-duration: 0.5s;
+}
+
 .reveal-copy .reveal-letter {
     transition-delay: 20ms;
 }

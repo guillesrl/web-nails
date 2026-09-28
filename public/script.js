@@ -38,6 +38,30 @@ const revealTargets = document.querySelectorAll(
 );
 const revealGroups = [];
 
+const heroHeading = document.querySelector('.hero-content h1');
+
+if (heroHeading) {
+    const text = heroHeading.textContent.trim();
+    const letters = Array.from(text);
+
+    heroHeading.setAttribute('aria-label', text);
+    heroHeading.textContent = '';
+
+    letters.forEach((character) => {
+        const letter = document.createElement('span');
+        letter.className = 'reveal-letter hero-reveal-letter';
+        letter.textContent = character === ' ' ? '\u00a0' : character;
+        heroHeading.appendChild(letter);
+    });
+
+    const heroLetters = Array.from(heroHeading.children);
+    window.setTimeout(() => {
+        heroLetters.forEach((letter, index) => {
+            window.setTimeout(() => letter.classList.add('is-visible'), index * 35);
+        });
+    }, 250);
+}
+
 revealTargets.forEach((target) => {
     const text = target.textContent.trim();
     const isParagraph = target.tagName === 'P';
