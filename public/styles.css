@@ -589,6 +589,21 @@ body {
     color: #ccc;
 }
 
+.back-to-top {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #d4a574;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+    color: #f0c18f;
+    transform: translateY(-2px);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-menu {
