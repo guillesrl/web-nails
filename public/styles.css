@@ -215,6 +215,16 @@ body {
     height: auto;
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    display: block;
+    transform: scale(1.04) translate3d(0, 0, 0);
+    transform-origin: center center;
+    will-change: transform;
+    transition: transform 120ms linear;
+}
+
+.about-image {
+    overflow: hidden;
+    border-radius: 20px;
 }
 
 /* Welcome Section */

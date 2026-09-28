@@ -36,6 +36,8 @@ function scrollToServices() {
 // the frame-by-frame animation used on the Stylo peluquería site.
 const hero = document.querySelector('.hero');
 const heroImage = document.getElementById('hero-image');
+const aboutSection = document.querySelector('.about');
+const aboutImage = document.querySelector('.about-image img');
 
 if (hero && heroImage) {
     let heroTicking = false;
@@ -59,6 +61,32 @@ if (hero && heroImage) {
 
     window.addEventListener('resize', updateHero);
     updateHero();
+}
+
+// About image motion: a lighter version of the hero treatment that keeps the
+// image framed while it gently travels through the viewport.
+if (aboutSection && aboutImage) {
+    let aboutTicking = false;
+
+    const updateAboutImage = () => {
+        const sectionStart = aboutSection.offsetTop - window.innerHeight;
+        const sectionEnd = aboutSection.offsetTop + aboutSection.offsetHeight;
+        const progress = Math.min(1, Math.max(0, (window.scrollY - sectionStart) / Math.max(sectionEnd - sectionStart, 1)));
+        const scale = 1.04 + progress * 0.08;
+        const y = (0.5 - progress) * 5;
+        aboutImage.style.transform = `scale(${scale}) translate3d(0, ${y}%, 0)`;
+        aboutTicking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+        if (!aboutTicking) {
+            window.requestAnimationFrame(updateAboutImage);
+            aboutTicking = true;
+        }
+    }, { passive: true });
+
+    window.addEventListener('resize', updateAboutImage);
+    updateAboutImage();
 }
 
 // Estado de paginación
