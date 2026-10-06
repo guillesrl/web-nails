@@ -8681,8 +8681,11 @@ function g() {
 	let [e, t] = (0, l.useState)(""), [n, r] = (0, l.useState)(null), i = f.find((t) => t.slug === e);
 	return (0, l.useEffect)(() => {
 		let t = !0;
-		return r(null), e && import("./cal-atoms-B35e3sTk.mjs").then(({ BookerEmbed: e }) => {
-			t && r(() => e);
+		return r(null), e && import("./cal-atoms-D3rhTwCE.mjs").then(({ BookerEmbed: e, CalProvider: n }) => {
+			t && r({
+				BookerEmbed: e,
+				CalProvider: n
+			});
 		}).catch(() => {
 			t && p("No se pudo cargar el calendario. Recarga la página e inténtalo de nuevo.", "#f44336");
 		}), () => {
@@ -8711,13 +8714,9 @@ function g() {
 			}),
 			i ? /* @__PURE__ */ (0, d.jsx)("div", {
 				className: "cal-booker__widget",
-				children: n ? /* @__PURE__ */ (0, d.jsx)(n, {
-					username: "guillesrl",
-					eventSlug: i.slug,
-					apiUrl: "https://api.cal.com/v2",
-					defaultPhoneCountry: "ad",
-					view: "MONTH_VIEW",
-					onCreateBookingSuccess: (e) => h(e, i.name)
+				children: n ? /* @__PURE__ */ (0, d.jsx)(_, {
+					...n,
+					service: i
 				}) : /* @__PURE__ */ (0, d.jsx)("p", {
 					className: "cal-booker__hint",
 					children: "Cargando horarios…"
@@ -8729,6 +8728,27 @@ function g() {
 		]
 	});
 }
-var _ = document.getElementById("cal-booker-root");
-_ && (0, u.createRoot)(_).render(/* @__PURE__ */ (0, d.jsx)(g, {}));
+function _({ BookerEmbed: e, CalProvider: t, service: n }) {
+	let [r, i] = (0, l.useState)(!1);
+	return (0, l.useEffect)(() => {
+		let e = window.setTimeout(() => i(!0), 0);
+		return () => window.clearTimeout(e);
+	}, []), /* @__PURE__ */ (0, d.jsx)(t, {
+		clientId: "",
+		options: { apiUrl: "https://api.cal.com/v2" },
+		children: r ? /* @__PURE__ */ (0, d.jsx)(e, {
+			username: "guillesrl",
+			eventSlug: n.slug,
+			apiUrl: "https://api.cal.com/v2",
+			defaultPhoneCountry: "ad",
+			view: "MONTH_VIEW",
+			onCreateBookingSuccess: (e) => h(e, n.name)
+		}) : /* @__PURE__ */ (0, d.jsx)("p", {
+			className: "cal-booker__hint",
+			children: "Cargando horarios…"
+		})
+	});
+}
+var v = document.getElementById("cal-booker-root");
+v && (0, u.createRoot)(v).render(/* @__PURE__ */ (0, d.jsx)(g, {}));
 //#endregion

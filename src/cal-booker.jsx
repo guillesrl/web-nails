@@ -57,15 +57,15 @@ async function saveBookingToDatabase(result, serviceName) {
 
 function BookingWidget() {
   const [serviceSlug, setServiceSlug] = useState('');
-  const [BookerEmbedComponent, setBookerEmbedComponent] = useState(null);
+  const [calComponents, setCalComponents] = useState(null);
   const selectedService = services.find((service) => service.slug === serviceSlug);
 
   useEffect(() => {
     let isCurrent = true;
-    setBookerEmbedComponent(null);
+    setCalComponents(null);
     if (serviceSlug) {
-      import('@calcom/atoms').then(({ BookerEmbed: Component }) => {
-        if (isCurrent) setBookerEmbedComponent(() => Component);
+      import('@calcom/atoms').then(({ BookerEmbed, CalProvider }) => {
+        if (isCurrent) setCalComponents({ BookerEmbed, CalProvider });
       }).catch(() => {
         if (isCurrent) showMessage('No se pudo cargar el calendario. Recarga la página e inténtalo de nuevo.', '#f44336');
       });
@@ -89,21 +89,38 @@ function BookingWidget() {
       </select>
       {selectedService ? (
         <div className="cal-booker__widget">
-          {BookerEmbedComponent ? (
-            <BookerEmbedComponent
-              username="guillesrl"
-              eventSlug={selectedService.slug}
-              apiUrl="https://api.cal.com/v2"
-              defaultPhoneCountry="ad"
-              view="MONTH_VIEW"
-              onCreateBookingSuccess={(result) => saveBookingToDatabase(result, selectedService.name)}
-            />
+          {calComponents ? (
+            <CalProviderReady {...calComponents} service={selectedService} />
           ) : <p className="cal-booker__hint">Cargando horarios…</p>}
         </div>
       ) : (
         <p className="cal-booker__hint">Selecciona el servicio para ver los horarios disponibles.</p>
       )}
     </div>
+  );
+}
+
+function CalProviderReady({ BookerEmbed, CalProvider, service }) {
+  const [apiReady, setApiReady] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setApiReady(true), 0);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  return (
+    <CalProvider clientId="" options={{ apiUrl: 'https://api.cal.com/v2' }}>
+      {apiReady ? (
+        <BookerEmbed
+          username="guillesrl"
+          eventSlug={service.slug}
+          apiUrl="https://api.cal.com/v2"
+          defaultPhoneCountry="ad"
+          view="MONTH_VIEW"
+          onCreateBookingSuccess={(result) => saveBookingToDatabase(result, service.name)}
+        />
+      ) : <p className="cal-booker__hint">Cargando horarios…</p>}
+    </CalProvider>
   );
 }
 
