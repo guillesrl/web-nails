@@ -196,7 +196,17 @@
             calLink: "guillesrl/",
           });
 
-          Cal.ns.esmaltados("ui", {"theme":"light","hideEventTypeDetails":false,"layout":"month_view"});
+          Cal.ns.esmaltados("ui", {
+            "theme":"light",
+            "hideEventTypeDetails":false,
+            "layout":"month_view",
+            "cssVarsPerTheme": {
+              "light": {
+                "cal-bg":"transparent",
+                "cal-bg-emphasis":"transparent"
+              }
+            }
+          });
           
           // Debug: Log all Cal.com events
           console.log('Cal.com initialized, setting up event listeners...');
