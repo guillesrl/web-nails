@@ -20,14 +20,14 @@ navLinks.forEach(link => {
         navMenu.classList.remove('active');
     });
 
-    if (link.getAttribute('href') === '#contact') {
+    if (link.getAttribute('href') === '#footer') {
         link.addEventListener('click', (event) => {
             event.preventDefault();
-            const bookingSection = document.getElementById('contact');
-            if (!bookingSection) return;
+            const footer = document.getElementById('footer');
+            if (!footer) return;
 
-            history.replaceState(null, '', '#contact');
-            bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', '#footer');
+            footer.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     }
 });
