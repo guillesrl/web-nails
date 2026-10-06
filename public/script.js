@@ -19,6 +19,17 @@ navLinks.forEach(link => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
     });
+
+    if (link.getAttribute('href') === '#contact') {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const bookingSection = document.getElementById('contact');
+            if (!bookingSection) return;
+
+            history.replaceState(null, '', '#contact');
+            bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
 });
 
 // Scroll Suave

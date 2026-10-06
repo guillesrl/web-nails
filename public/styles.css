@@ -507,6 +507,7 @@ body {
 .booking {
     position: relative;
     isolation: isolate;
+    scroll-margin-top: 70px;
     background:
         linear-gradient(rgba(45, 32, 29, 0.5), rgba(45, 32, 29, 0.5)),
         url('media/reservation-background.jpg') center / cover no-repeat;
