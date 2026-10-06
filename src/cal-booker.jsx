@@ -93,6 +93,7 @@ function BookingWidget() {
             <BookerEmbedComponent
               username="guillesrl"
               eventSlug={selectedService.slug}
+              apiUrl="https://api.cal.com/v2"
               defaultPhoneCountry="ad"
               view="MONTH_VIEW"
               onCreateBookingSuccess={(result) => saveBookingToDatabase(result, selectedService.name)}

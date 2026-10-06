@@ -8714,6 +8714,7 @@ function g() {
 				children: n ? /* @__PURE__ */ (0, d.jsx)(n, {
 					username: "guillesrl",
 					eventSlug: i.slug,
+					apiUrl: "https://api.cal.com/v2",
 					defaultPhoneCountry: "ad",
 					view: "MONTH_VIEW",
 					onCreateBookingSuccess: (e) => h(e, i.name)
