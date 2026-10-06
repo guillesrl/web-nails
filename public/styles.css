@@ -522,42 +522,6 @@ body {
     text-shadow: 0 2px 14px rgba(45, 32, 29, 0.45);
 }
 
-.cal-booker {
-    width: min(100% - 2rem, 1080px);
-    margin: 0 auto;
-}
-
-.cal-booker__label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #fff;
-    font-weight: 600;
-}
-
-.cal-booker__select {
-    width: min(100%, 420px);
-    min-height: 48px;
-    margin-bottom: 1.5rem;
-    padding: 0.75rem 1rem;
-    border: 1px solid #e4d5c7;
-    border-radius: 10px;
-    background: #fff;
-    color: #342722;
-    font: inherit;
-}
-
-.cal-booker__widget {
-    min-height: 600px;
-    overflow: hidden;
-    border-radius: 16px;
-    background: #fff;
-}
-
-.cal-booker__hint {
-    color: #fff;
-    text-align: center;
-}
-
 .booking-form-container {
     max-width: 600px;
     margin: 0 auto;

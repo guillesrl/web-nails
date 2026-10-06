@@ -287,9 +287,9 @@ La aplicación incluye soporte completo para Docker:
 - **CDN**: Usar CDN para recursos estáticos
 
 ### Integración Cal.com
-- El widget usa `BookerEmbed` y fija Andorra como país inicial del teléfono (`defaultPhoneCountry="ad"`).
-- El cliente puede elegir entre los siete servicios de Carla antes de ver los horarios.
-- Para regenerar los archivos estáticos de Cal.com después de cambiar `src/cal-booker.jsx`, ejecuta `npm run build:widget`; el bundle se sirve desde `public/assets`.
+- **Event Listeners**: Simplificar manejadores de eventos para usar solo "bookingCompleted"
+- **Extracción de Datos**: Mejorar extracción de datos desde objeto de evento
+- **Validación**: Añadir validación redundante para captura de reservas
 
 ## 🔍 Solución de Problemas
 
