@@ -43,9 +43,10 @@ function scrollToServices() {
     servicesSection.scrollIntoView({ behavior: 'smooth' });
 }
 
-// Reveal section headings letter by letter and supporting copy word by word.
+// Reveal selected section headings letter by letter. The about section keeps
+// its copy static so it remains comfortable to read, especially on mobile.
 const revealTargets = document.querySelectorAll(
-    '.about-text h2, .about-text p, .welcome h2, .services > .container > h2, .booking h2'
+    '.welcome h2, .services > .container > h2, .booking h2'
 );
 const revealGroups = [];
 
@@ -75,8 +76,7 @@ if (heroHeading) {
 
 revealTargets.forEach((target) => {
     const text = target.textContent.trim();
-    const isParagraph = target.tagName === 'P';
-    const tokens = isParagraph ? text.match(/\S+\s*/g) || [] : Array.from(text);
+    const tokens = Array.from(text);
 
     target.setAttribute('aria-label', text);
     target.textContent = '';
@@ -86,7 +86,7 @@ revealTargets.forEach((target) => {
         const letter = document.createElement('span');
         letter.className = 'reveal-letter';
         letter.dataset.index = index;
-        letter.textContent = isParagraph ? token : (token === ' ' ? '\u00a0' : token);
+        letter.textContent = token === ' ' ? '\u00a0' : token;
         target.appendChild(letter);
     });
 
