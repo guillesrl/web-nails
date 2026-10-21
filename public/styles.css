@@ -615,6 +615,10 @@ body {
     color: #ccc;
 }
 
+.footer-section a {
+    color: inherit;
+}
+
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
